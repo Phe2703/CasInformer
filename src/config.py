@@ -288,8 +288,6 @@ def get_icp_default_config():
                 unit_bias = 0,
 
                 observe_time = 1 * 3600,
-                # observe_time = 2 * 3600,
-                # observe_time = 3 * 3600,
                 predict_time = 24 * 3600,
                 time_coefficient = 60,
                 
@@ -311,78 +309,7 @@ def get_icp_default_config():
                 average_batch_data_size = False,
             ),
         ),
-        # 'acm':dict(
-        #     data = dict(
-        #         observe_time = 3 * 12,
-        #         predict_time = 10 * 12,
-        #         time_coefficient = 1,
 
-        #         train_ratio = 0.7,
-        #         val_ratio = 0.15,
-        #         test_ratio = 0.15,
-        #         sort_by_time = True,
-        #         random_split = False,
-
-        #     ),
-        #     model = dict(),
-        # ),
-        # 'dblp':dict(
-        #     data = dict(
-        #         # observe_time = 1,
-        #         # observe_time = 2,
-        #         observe_time = 5,
-        #         predict_time = 20,
-        #         time_coefficient = 1,
-                
-        #         publish_start = 1893,
-        #         # publish_end = 1989,
-        #         publish_end = 1997,
-        #         min_size_in_observe_window = 5,
-
-        #         train_batch_size = 128,
-        #         val_batch_size = 128,
-        #         test_batch_size = 128,
-        #         train_ratio = 0.7,
-        #         val_ratio = 0.15,
-        #         test_ratio = 0.15,
-        #         sort_by_time = True,
-        #         random_split = False,
-
-        #     ),
-        #     model = dict(
-        #         # epochs = 100,
-        #         # check_point = 5,
-        #         # early_stop_patience = 5,
-        #     ),
-        # ),
-        # 'synthetic_data_V2':dict(
-        #     data = dict(
-        #         train_batch_size = 100,                   # 单次读取图的数量
-        #         val_batch_size = 100,
-        #         test_batch_size = 100,
-
-        #         train_ratio = 0.7,
-        #         val_ratio = 0.1,
-        #         test_ratio = 0.2,
-        #         random_split = False,
-        #     ),
-        #     model = dict(
-        #         learning_rate = 0.001,
-        #     ),
-        # ),
-        # 'HEP-PH':dict(
-        #     data = dict(
-        #         observe_time = 3,
-        #         # observe_time = 4,
-        #         # observe_time = 5,
-        #         train_ratio = 0.7,
-        #         val_ratio = 0.15,
-        #         test_ratio = 0.15,
-        #         sort_by_time = True,
-        #         random_split = False,
-        #     ),
-        #     model = dict(),
-        # ),
     }
 
     default_config = dict(
