@@ -49,9 +49,9 @@ def get_icp_default_config():
 
         cascade_level_features_dim = cascade_level_features_dim,
 
+        rnn_type = "Informer",
         # rnn_type = "LSTM",
         # rnn_type = "GRU",
-        rnn_type = "Informer",
         rnn_num_layers = 2,
         rnn_dropout = 0.3,
         rnn_hidden_size = hidden_size * 2,
@@ -113,17 +113,15 @@ def get_icp_default_config():
 
     train_settings = dict(
 
-        # learning_rate = 3e-4,
         learning_rate = 0.001,
         weight_decay = 0.01,
-        # weight_decay = 0.0001,
-        # weight_decay = 1e-5,
         # optimizer_type = "Adam",
         optimizer_type = "AdamW",
         optimizer_eps = 1e-8,
         optimizer_beta1 = 0.9,
         optimizer_beta2 = 0.999,
         optimizer_clip_value = 100.,
+
         loss_type = "msle",
         # loss_type = 'msle_log2',
         # loss_type = "msle_log10",
@@ -160,14 +158,14 @@ def get_icp_default_config():
         # predict_type = 'full',     # 预测最终规模
         predict_type = 'gap',      # 预测增量
 
-        loader = 'batch',
-        # loader = 'list',
-        pre_load = False,
+        loader = 'batch',           # pyg的dataloader，读取本地处理好的数据特征文件
+        # loader = 'list',          # 自定义的loader，每次都是动态生成数据特征，修改load_data.py后便于进行调试
+        pre_load = False,           # 仅对list loader有效，加载数据后先统一生成特征
         random_split = False,
         train_ratio = 0.7,
         val_ratio = 0.15,
         test_ratio = 0.15,
-        average_batch_data_size = False, 
+        average_batch_data_size = False,    # 尝试平衡显存占用，效果不大，可能会影响训练
         
         train_batch_size = 32, 
         val_batch_size = 32,

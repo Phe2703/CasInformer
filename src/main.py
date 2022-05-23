@@ -324,8 +324,11 @@ def get_loss(out, y, default_config):
             if default_config['train_settings']['use_amp']:
                 out = out.float()
                 y = y.float()
+
+            # 消融实验时使用，只用末尾时刻的预测值计算loss，以对比不同数据量对模型的性能增益
             # out = out[:,-1]
             # y = y[:,-1]
+
             return loss_dict[loss_type](F.elu(out) + 1, F.elu(y) + 1)
     
     return loss_dict[loss_type](out, y)

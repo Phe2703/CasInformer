@@ -212,7 +212,8 @@ class TimeDecayWrapper(TimeDecay):
             batch_cascade = torch.cat( (batch_cascade, padding_zero), dim = 1)
 
         # 输入到时间衰减层
-        batch_cascade = super().forward(batch_cascade, batch_time_interval)
+        # 如做消融实验，注释此行即可
+        # batch_cascade = super().forward(batch_cascade, batch_time_interval)
 
         return batch_cascade
 
@@ -351,9 +352,17 @@ class DataEmbedding(nn.Module):
     def forward(self, x, batch_time_interval, batch_struct_time_feature, batch_cascade_feature, padding):
         # 只有输入的x需要考虑padding，y不存在这种情况
 
-        x = self.pos_embedding_layer(x, batch_time_interval, padding) + \
-            self.time_embedding_layer(batch_struct_time_feature, padding) + \
-            self.token_embedding_layer(batch_cascade_feature, padding)
+        # 做消融实验时注意先对x进行padding再传入各个层
+        # 时间衰减层即可对x进行padding，消融实验时注释对应类中的矩阵乘法即可，不要注释此行
+        x = self.pos_embedding_layer(x, batch_time_interval, padding)
+
+        # 对比sin pe，注意不要注释上面一行，否则未padding可能会导致长度不一致
+        x = x + self.sin_pos_embedding_layer(x)      
+
+        # 时间编码
+        # x = x + self.time_embedding_layer(batch_struct_time_feature, padding)
+        # 级联特征编码
+        # x = x + self.token_embedding_layer(batch_cascade_feature, padding)
         
         x = self.drop_out(x)
 

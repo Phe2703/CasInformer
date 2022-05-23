@@ -713,16 +713,16 @@ def get_observe_snapshot_index(cascade_data: dict, data_settings: dict) -> List[
     snapshot_indices.extend( candidate_indices[-last_n:])
 
 
-    '''对比版本'''
+    '''对比版本，等时间间隔选取快照'''
     # 等时间间隔选取快照
-    # time_interval = data_settings['observe_time'] / number_of_snapshot
+    # interval = data_settings['observe_time'] / number_of_snapshot
     # snapshot_times = cascade_data['snapshot_times']
     # snapshot_indices = []
     # for i in range(number_of_snapshot):
-    #     tmp = [n for n,t in enumerate(snapshot_times) if t <= time_interval*(i+1)]
+    #     tmp = [n for n,t in enumerate(snapshot_times) if t <= interval*(i+1)]
     #     if tmp:
     #         snapshot_indices.append(tmp[-1])
-    '''仅用于对比效果'''
+    '''仅用于消融实验时对比效果'''
 
     # if len(snapshot_indices) == 0:
     #     print(cascade_data)
